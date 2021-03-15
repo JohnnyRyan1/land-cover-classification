@@ -16,12 +16,12 @@ from osgeo import gdal
 filepath = '/home/johnny/Documents/Teaching/490_Geospatial_Data_Science_Applications/Applications/Land_Cover_Classification/data/landsat/' 
 
 # Define image list
-images_winter = sorted(glob.glob('LC08_L1TP_045031_20200222_20200225_01_T1*.tif'))
+images_winter = sorted(glob.glob(filepath + 'LC08_L1TP_045031_20200222_20200225_01_T1_*.tif'))
 
 # Define some functions
 def geotiff_read(infile):
     """ 
-    Function to read a Geotiff file and convert to numpy array.
+    Function to read a GeoTIFF file and convert to numpy array.
     
     """
     # Allow GDAL to throw Python exceptions
@@ -46,4 +46,25 @@ def geotiff_read(infile):
     band = tiff.GetRasterBand(1)
     nodata = band.GetNoDataValue()
    
-    return array, geotransform,  projection, nodata
+    return array, geotransform, projection, nodata
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
