@@ -11,7 +11,6 @@ import numpy as np
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler 
 from sklearn.metrics import plot_confusion_matrix 
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import classification_report
@@ -60,8 +59,6 @@ predictions = classifier.predict(X_test)
 # Evaluate model
 ###############################################################################
 
-plot_confusion_matrix(classifier, X_test, y_test)
-
 print("Completed training and testing model...")
 print("Fraction Correct")
 print(np.sum(predictions == y_test) / float(len(y_test)))
@@ -75,6 +72,9 @@ cmat = confusion_matrix(y_test, predictions)
    
 # The fraction of correctly classified labels 
 fraction = cmat.diagonal()/cmat.sum(axis=1)
+
+# Plot confusion matrix
+plot_confusion_matrix(classifier, X_test, y_test)
 
 # F1 score
 
@@ -172,7 +172,7 @@ df = df[['B10', 'B11', 'B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B9']]
 pred_y = classifier.predict(df.astype(float))
 p = pred_y.reshape(array.shape[0], array.shape[1])
 
-# Write classified array as an GeoTiff
+# Write classified array as an GeoTIFF
 filepath = '/home/johnny/Documents/Teaching/490_Geospatial_Data_Science_Applications/Applications/Land_Cover_Classification/data/classifications/'
 geotiff_write(filepath + 'classified_rf.tif', 
               geotransform, projection, p)
