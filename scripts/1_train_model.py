@@ -35,9 +35,20 @@ training_data = pd.read_csv(filepath + 'training_data.csv')
 # Define feeature list 
 feature_list = ['B10', 'B11', 'B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B9']
 
-# Define labels and targets (note that we can't use all data because of some NaNs at the start)
+# Define labels and targets
 y = training_data['label']
 X = training_data.loc[:, training_data.columns != 'label']
+
+###############################################################################
+# Visualize data
+###############################################################################
+
+plt.scatter(X[y==1]['B1'], X[y==1]['B6'], color='blue', zorder=2)
+plt.scatter(X[y==2]['B1'], X[y==2]['B6'], color='yellow', zorder=2)
+plt.scatter(X[y==3]['B1'], X[y==3]['B6'], color='darkgreen', zorder=1)
+plt.scatter(X[y==4]['B1'], X[y==4]['B6'], color='lightgreen', zorder=2)
+plt.xlabel('B1')
+plt.ylabel('B6')
 
 ###############################################################################
 # Perform machine learning using Random Forests
@@ -71,12 +82,12 @@ print(classification_report(y_test, predictions, target_names=target_names))
 cmat = confusion_matrix(y_test, predictions)
    
 # The fraction of correctly classified labels 
-fraction = cmat.diagonal()/cmat.sum(axis=1)
+fraction = cmat.diagonal() / cmat.sum(axis=1)
 
 # Plot confusion matrix
 plot_confusion_matrix(classifier, X_test, y_test)
 
-# F1 score
+# F1 score?
 
 ###############################################################################
 # Apply model to Landsat image
